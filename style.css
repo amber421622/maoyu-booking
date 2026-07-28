@@ -531,3 +531,36 @@ body:not(.booking-page) main > .page-hero:first-child .cat-slider{
   opacity:1;
   transform:rotate(-45deg) !important;
 }
+
+
+/* V6.3.2：細緻線條貓掌 */
+.menu-toggle{
+  width:34px !important;
+  height:34px !important;
+  padding:7px !important;
+}
+
+.menu-toggle .paw-icon{
+  width:20px !important;
+  height:20px !important;
+  fill:none !important;
+  stroke:var(--brown) !important;
+  stroke-width:3.2 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+  overflow:visible;
+}
+
+/* 展開選單時仍保留同一個貓掌，不出現其他線條 */
+.menu-toggle::before,
+.menu-toggle::after,
+.menu-toggle.active::before,
+.menu-toggle.active::after{
+  content:none !important;
+  display:none !important;
+}
+
+.menu-toggle.active .paw-icon{
+  opacity:1 !important;
+  transform:scale(.92) !important;
+}
