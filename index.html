@@ -3,588 +3,93 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f6f0e7">
-  <title>貓嶼・慢焙｜線上預約</title>
-  <style>
-    :root{
-      --cream:#f6f0e7;
-      --paper:#fffdf9;
-      --brown:#704218;
-      --brown-2:#9a704b;
-      --ink:#3d342d;
-      --muted:#786c63;
-      --line:#e5d9cc;
-      --soft:#ecdfcf;
-      --sage:#8d9985;
-      --shadow:0 16px 42px rgba(92,66,43,.12);
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      background:var(--cream);
-      color:var(--ink);
-      font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-      line-height:1.7;
-      -webkit-font-smoothing:antialiased;
-    }
-    a{text-decoration:none;color:inherit}
-    button,input,select{font:inherit}
-    img{display:block;max-width:100%}
-
-    .topbar{
-      position:sticky;top:0;z-index:40;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:10px 16px;
-      background:rgba(246,240,231,.92);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(112,66,24,.08);
-    }
-    .brand{
-      display:flex;align-items:center;gap:9px;
-      color:var(--brown);font-weight:800;letter-spacing:.06em;font-size:.96rem;
-    }
-    .brand img{width:46px;height:46px;border-radius:50%;object-fit:cover}
-main{max-width:760px;margin:auto}
-    section{padding:52px 18px}
-    h1,h2,h3,p{margin-top:0}
-    h1{
-      margin-bottom:8px;
-      font-size:clamp(2.45rem,11.5vw,4.15rem);
-      line-height:1.05;
-      letter-spacing:.02em;
-      color:var(--brown);
-    }
-    h2{
-      margin-bottom:8px;
-      font-size:clamp(2rem,9vw,3rem);
-      line-height:1.15;
-      color:var(--brown);
-    }
-    .eyebrow{
-      display:inline-block;margin-bottom:10px;
-      font-size:.76rem;letter-spacing:.18em;color:var(--brown-2);
-    }
-    .muted{color:var(--muted)}
-    .btn{
-      display:block;width:100%;border:0;border-radius:16px;
-      padding:14px 18px;background:var(--brown);color:#fff;
-      text-align:center;font-weight:800;cursor:pointer;
-      box-shadow:0 10px 24px rgba(112,66,24,.18);
-    }
-
-    .hero{padding-top:28px;padding-bottom:38px}
-    .hero-copy{margin-bottom:20px}
-    .hero-copy .tagline{
-      margin-bottom:12px;font-size:1.25rem;font-weight:700;color:#5c4d42;
-    }
-    .hero-copy p{font-size:1rem;color:var(--muted);margin-bottom:22px}
-
-    .cat-slider{
-      position:relative;
-      background:var(--paper);
-      border:1px solid rgba(112,66,24,.08);
-      border-radius:26px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .slides{
-      display:flex;
-      overflow-x:auto;
-      scroll-snap-type:x mandatory;
-      scrollbar-width:none;
-      -webkit-overflow-scrolling:touch;
-    }
-    .slides::-webkit-scrollbar{display:none}
-    .cat-card{
-      min-width:100%;
-      scroll-snap-align:start;
-      padding:18px;
-    }
-    .cat-photo{
-      aspect-ratio:4/3;
-      border-radius:20px;
-      background:linear-gradient(145deg,#efe4d7,#f9f5ee);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      margin-bottom:16px;
-    }
-    .cat-photo img{width:76%;height:76%;object-fit:contain}
-    .cat-meta{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
-    .cat-card h3{font-size:1.55rem;color:var(--brown);margin-bottom:2px}
-    .cat-card p{margin:0;color:var(--muted);font-size:.94rem}
-    .swipe-hint{
-      padding:0 18px 8px;text-align:center;color:#9a897b;font-size:.82rem;
-    }
-
-    .cat-dots{
-      display:flex;
-      justify-content:center;
-      gap:7px;
-      padding:0 18px 15px;
-    }
-    .cat-dot{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:#cfbead;
-      transition:.2s ease;
-    }
-    .cat-dot.active{
-      width:18px;
-      border-radius:999px;
-      background:var(--brown);
-    }
-
-    .booking-section{background:var(--soft)}
-    .booking-card{
-      margin-top:22px;
-      background:var(--paper);
-      border-radius:26px;
-      padding:20px;
-      box-shadow:var(--shadow);
-    }
-    form{display:grid;gap:16px}
-    label{
-      display:block;margin-bottom:6px;
-      font-size:.9rem;font-weight:700;color:#66564a;
-    }
-    input,select{
-      width:100%;
-      height:50px;
-      border:1px solid #d9c8b8;
-      border-radius:14px;
-      padding:0 14px;
-      background:#fff;color:var(--ink);
-      outline:none;
-    }
-    input[type="date"]{
-      height:46px;
-      min-height:46px;
-      line-height:46px;
-      padding-top:0;
-      padding-bottom:0;
-      -webkit-appearance:none;
-      appearance:none;
-    }
-    select:disabled{
-      background:#f3eee8;
-      color:#9b8f86;
-    }
-    input:focus,select:focus{
-      border-color:var(--brown);
-      box-shadow:0 0 0 3px rgba(112,66,24,.1);
-    }
-    .booking-note{
-      margin:0;
-      padding:14px 15px;
-      border-radius:16px;
-      background:#f4eadf;
-      color:#6c5d52;
-      font-size:.9rem;
-    }
-    .result{
-      display:none;
-      margin-top:15px;
-      padding:15px;
-      border-radius:14px;
-      background:#edf2e9;
-      color:#55614f;
-    }
-
-    details{
-      background:transparent;
-      border:0;
-      border-bottom:1px solid rgba(112,66,24,.20);
-      border-radius:0;
-      padding:17px 2px;
-      margin:0;
-    }
-    summary{
-      cursor:pointer;
-      color:var(--brown);
-      font-weight:800;
-      padding:0 2px;
-      list-style:none;
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
-    }
-    summary::-webkit-details-marker{display:none}
-    summary::after{content:"＋";font-size:1.2rem;font-weight:500}
-    details[open] summary::after{content:"－"}
-    details p{margin:12px 0 0;color:var(--muted)}
-
-    .location-section{background:#efe3d5}
-    .location-card{
-      margin-top:22px;
-      background:var(--paper);
-      border-radius:26px;
-      padding:20px;
-      box-shadow:var(--shadow);
-    }
-    .map{
-      min-height:220px;
-      border-radius:18px;
-      background:
-        linear-gradient(rgba(255,255,255,.38),rgba(255,255,255,.38)),
-        repeating-linear-gradient(45deg,#e8dfd4 0 18px,#f3ede6 18px 36px);
-      display:grid;
-      place-items:center;
-      text-align:center;
-      color:#83766d;
-      margin-bottom:18px;
-    }
-    .info-row{
-      padding:12px 0;
-      border-bottom:1px solid var(--line);
-    }
-    .info-row:last-of-type{border-bottom:0}
-    .info-row strong{display:block;color:var(--brown)}
-    .nav-btn{
-      margin-top:16px;
-      display:block;
-      width:100%;
-      text-align:center;
-      padding:13px 16px;
-      border-radius:15px;
-      background:var(--brown);
-      color:#fff;
-      font-weight:800;
-    }
-
-    footer{
-      padding:30px 18px 100px;
-      text-align:center;
-      color:#7f7268;
-      font-size:.86rem;
-    }
-
-    .floating-book{
-      position:fixed;
-      left:16px;right:16px;bottom:max(14px,env(safe-area-inset-bottom));
-      z-index:50;
-      display:block;
-      padding:13px 18px;
-      border-radius:16px;
-      background:var(--brown);
-      color:#fff;
-      text-align:center;
-      font-weight:800;
-      box-shadow:0 14px 32px rgba(80,49,22,.28);
-      transition:opacity .25s ease,transform .25s ease;
-    }
-    .floating-book.is-hidden{
-      opacity:0;
-      transform:translateY(120%);
-      pointer-events:none;
-    }
-
-    @media(min-width:700px){
-      .topbar{padding-left:28px;padding-right:28px}
-      section{padding-left:28px;padding-right:28px}
-      .hero{padding-top:62px}
-      .cat-photo img{width:60%;height:60%}
-      .floating-book{left:auto;right:24px;width:210px}
-    }
-  </style>
+  <meta name="theme-color" content="#f7f1e8">
+  <title>線上預約｜貓嶼・慢焙</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="#top">
+<body class="booking-page">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
       <img src="logo.jpg" alt="貓嶼・慢焙 Logo">
       <span>貓嶼・慢焙</span>
     </a>
-  </header>
+    <button class="menu-toggle" type="button" aria-label="開啟選單" aria-expanded="false">
+      <span></span>
+    </button>
+  </div>
+</header>
+<div class="mobile-menu">
+  <nav>
+    <a href="index.html" class="">首頁</a>
+<a href="booking.html" class="active">線上預約</a>
+<a href="qa.html" class="">常見問題</a>
+<a href="pet-rule.html" class="">寵物互動規則</a>
+<a href="store-rule.html" class="">入店規定</a>
+<a href="contact.html" class="">聯絡我們</a>
+  </nav>
+</div>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-copy">
-        <span class="eyebrow">COFFEE・DESSERT・CATS</span>
-        <h1>貓嶼・慢焙</h1>
-        <div class="tagline">慢一點，與貓相遇。</div>
-        <p>一間讓人慢下來的咖啡廳。</p>
+<main>
+
+<section class="page-hero booking-section">
+  <span class="eyebrow">BOOKING</span>
+  <h1>線上預約</h1>
+  <p class="lead">依照日期、人數與時段完成預約。</p>
+
+  <div class="booking-card">
+    <form id="bookingForm">
+      <div>
+        <label for="date">日期</label>
+        <input id="date" name="date" type="date" required>
       </div>
-
-      <div class="cat-slider" aria-label="貓咪介紹">
-        <div class="slides">
-          <article class="cat-card">
-            <div class="cat-photo"><img src="logo.jpg" alt="凜凜示意圖"></div>
-            <div class="cat-meta">
-              <div><h3>凜凜</h3><p>緬因｜喜歡在高處觀察大家。</p></div>
-            </div>
-          </article>
-          <article class="cat-card">
-            <div class="cat-photo"><img src="logo.jpg" alt="茶茶示意圖"></div>
-            <div class="cat-meta">
-              <div><h3>茶茶</h3><p>緬因｜安靜時有氣勢，熟了很黏人。</p></div>
-            </div>
-          </article>
-          <article class="cat-card">
-            <div class="cat-photo"><img src="logo.jpg" alt="麥麥示意圖"></div>
-            <div class="cat-meta">
-              <div><h3>麥麥</h3><p>英長｜會先觀察，再慢慢靠近。</p></div>
-            </div>
-          </article>
-        </div>
-        <div class="swipe-hint">左右滑動認識島上的貓咪</div>
-        <div class="cat-dots" id="catDots" aria-label="貓咪卡片頁數"></div>
+      <div>
+        <label for="people">人數</label>
+        <select id="people" name="people" required>
+          <option value="">請選擇人數</option>
+          <option value="1">1 位</option>
+          <option value="2">2 位</option>
+          <option value="3">3 位</option>
+          <option value="4">4 位</option>
+          <option value="5">5 位</option>
+          <option value="6">6 位</option>
+        </select>
       </div>
-    </section>
-
-    <section id="qa">
-      <h2>常見問題</h2>
-      <p class="muted">點一下問題即可展開答案。</p>
-
-      <details>
-        <summary>每次用餐有限時嗎？</summary>
-        <p>每場 100 分鐘，實際流程會依現場狀況安排。</p>
-      </details>
-      <details>
-        <summary>可以抱貓或餵零食嗎？</summary>
-        <p>不主動抱貓，也不提供餵食零食；請讓貓咪自行決定是否靠近。</p>
-      </details>
-      <details>
-        <summary>有低消嗎？</summary>
-        <p>每人低消一杯飲品。</p>
-      </details>
-      <details>
-        <summary>可以帶小朋友嗎？</summary>
-        <p>正式年齡與陪同規定會在開幕前公告。</p>
-      </details>
-      <details>
-        <summary>臨時不能到可以取消嗎？</summary>
-        <p>正式取消規則會在開幕前公告於預約頁面。</p>
-      </details>
-    </section>
-
-
-    <section id="booking" class="booking-section">
-      <h2>線上預約</h2>
-      <p class="muted">依照日期、人數與時段完成預約。</p>
-
-      <div class="booking-card">
-        <form id="bookingForm">
-          <div>
-            <label for="date">日期</label>
-            <input id="date" name="date" type="date" required>
-          </div>
-
-          <div>
-            <label for="people">人數</label>
-            <select id="people" name="people" required>
-              <option value="">請選擇人數</option>
-              <option value="1">1 位</option>
-              <option value="2">2 位</option>
-              <option value="3">3 位</option>
-              <option value="4">4 位</option>
-              <option value="5">5 位</option>
-              <option value="6">6 位</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="time">時段</label>
-            <select id="time" name="time" required disabled>
-              <option value="">請先選擇日期與人數</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="name">姓名</label>
-            <input id="name" name="name" autocomplete="name" placeholder="請輸入訂位姓名" required>
-          </div>
-
-          <div>
-            <label for="phone">電話</label>
-            <input id="phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="09xx-xxx-xxx" required>
-          </div>
-
-          <p class="booking-note">每場 100 分鐘，每時段最多 18 位；每人低消一杯飲品。</p>
-
-          <button class="btn" type="submit">送出預約</button>
-        </form>
-        <div id="result" class="result"></div>
+      <div>
+        <label for="time">時段</label>
+        <select id="time" name="time" required disabled>
+          <option value="">請先選擇日期與人數</option>
+        </select>
       </div>
-    </section>
-    <section id="location" class="location-section">
-      <h2>交通資訊</h2>
-      <p class="muted">店址確認後，這裡會提供完整導航資訊。</p>
-
-      <div class="location-card">
-        <div class="map">Google 地圖<br>店址確認後嵌入</div>
-
-        <div class="info-row">
-          <strong>地址</strong>
-          待公布
-        </div>
-        <div class="info-row">
-          <strong>營業時間</strong>
-          待公布
-        </div>
-        <div class="info-row">
-          <strong>停車資訊</strong>
-          待公布
-        </div>
-        <div class="info-row">
-          <strong>聯絡方式</strong>
-          待公布
-        </div>
-
-        <a class="nav-btn" href="#" aria-disabled="true">開啟導航</a>
+      <div>
+        <label for="name">姓名</label>
+        <input id="name" name="name" autocomplete="name" placeholder="請輸入訂位姓名" required>
       </div>
-    </section>
-  </main>
+      <div>
+        <label for="phone">電話</label>
+        <input id="phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="09xx-xxx-xxx" required>
+      </div>
+      <p class="notice">每場 100 分鐘，每時段最多 18 位；每人低消一杯飲品。</p>
+      <button class="btn" type="submit">送出預約</button>
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+</section>
 
-  <footer>
-    <img src="logo.jpg" alt="貓嶼・慢焙 Logo" style="width:54px;height:54px;border-radius:50%;object-fit:cover;margin:0 auto 10px;">
-    <strong>貓嶼・慢焙</strong>
-    <div style="margin:8px 0 5px;">Instagram　Facebook</div>
-    <div>© 2026 Maoyu Slow Bake｜V5 骨架版</div>
-  </footer>
+</main>
 
-  <a class="floating-book" href="#booking">立即預約</a>
+<footer class="site-footer">
+  <img src="logo.jpg" alt="貓嶼・慢焙 Logo">
+  <strong>貓嶼・慢焙</strong>
+  <div class="footer-links">
+    <span>Instagram</span>
+    <span>Facebook</span>
+  </div>
+  <div>© 2026 Maoyu Slow Bake</div>
+</footer>
 
-  <script>
-
-    const slidesEl = document.querySelector('.slides');
-    const cards = [...document.querySelectorAll('.cat-card')];
-    const dotsEl = document.getElementById('catDots');
-
-    cards.forEach((_, i) => {
-      const dot = document.createElement('span');
-      dot.className = 'cat-dot' + (i === 0 ? ' active' : '');
-      dotsEl.appendChild(dot);
-    });
-
-    function updateCatDots() {
-      const width = slidesEl.clientWidth || 1;
-      const index = Math.round(slidesEl.scrollLeft / width);
-      [...dotsEl.children].forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-      });
-    }
-
-    slidesEl.addEventListener('scroll', () => {
-      window.requestAnimationFrame(updateCatDots);
-    }, {passive:true});
-
-    const floatingBook = document.querySelector('.floating-book');
-    const bookingSection = document.getElementById('booking');
-
-    const bookingObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        floatingBook.classList.toggle('is-hidden', entry.isIntersecting);
-      });
-    }, {threshold:0.18});
-
-    bookingObserver.observe(bookingSection);
-
-    const CAPACITY = 18;
-    const ALL_SLOTS = [
-      '11:00–12:40',
-      '13:00–14:40',
-      '15:00–16:40',
-      '17:00–18:40'
-    ];
-
-    const form = document.getElementById('bookingForm');
-    const dateInput = document.getElementById('date');
-    const peopleInput = document.getElementById('people');
-    const timeInput = document.getElementById('time');
-
-    const today = new Date();
-    const max = new Date();
-    max.setDate(today.getDate() + 30);
-
-    const fmt = d => {
-      const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
-      return local.toISOString().split('T')[0];
-    };
-
-    dateInput.min = fmt(today);
-    dateInput.max = fmt(max);
-
-    function getBookings() {
-      return JSON.parse(localStorage.getItem('maoyuBookings') || '[]');
-    }
-
-    function bookedSeats(date, time) {
-      return getBookings()
-        .filter(item => item.date === date && item.time === time)
-        .reduce((sum, item) => sum + Number(item.people || 0), 0);
-    }
-
-    function updateAvailableTimes() {
-      const date = dateInput.value;
-      const partySize = Number(peopleInput.value);
-
-      timeInput.innerHTML = '';
-
-      if (!date || !partySize) {
-        timeInput.disabled = true;
-        timeInput.innerHTML = '<option value="">請先選擇日期與人數</option>';
-        return;
-      }
-
-      const available = ALL_SLOTS.filter(slot => {
-        const remaining = CAPACITY - bookedSeats(date, slot);
-        return remaining >= partySize;
-      });
-
-      timeInput.disabled = false;
-
-      if (!available.length) {
-        timeInput.disabled = true;
-        timeInput.innerHTML = '<option value="">當日已無可預約時段</option>';
-        return;
-      }
-
-      timeInput.innerHTML = '<option value="">請選擇時段</option>';
-
-      available.forEach(slot => {
-        const remaining = CAPACITY - bookedSeats(date, slot);
-        const option = document.createElement('option');
-        option.value = slot;
-        option.textContent = `${slot}（剩餘 ${remaining} 位）`;
-        timeInput.appendChild(option);
-      });
-    }
-
-    dateInput.addEventListener('change', updateAvailableTimes);
-    peopleInput.addEventListener('change', updateAvailableTimes);
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const data = Object.fromEntries(new FormData(this).entries());
-      const partySize = Number(data.people);
-      const remaining = CAPACITY - bookedSeats(data.date, data.time);
-
-      if (remaining < partySize) {
-        alert('這個時段的剩餘名額不足，請重新選擇。');
-        updateAvailableTimes();
-        return;
-      }
-
-      const list = getBookings();
-      data.id = Date.now();
-      data.createdAt = new Date().toLocaleString('zh-TW');
-      list.push(data);
-      localStorage.setItem('maoyuBookings', JSON.stringify(list));
-
-      const result = document.getElementById('result');
-      result.style.display = 'block';
-      result.innerHTML =
-        '<strong>測試預約已儲存 ✓</strong><br>' +
-        data.date + '　' + data.time + '<br>' +
-        data.name + '｜' + data.people + ' 位';
-
-      this.reset();
-      updateAvailableTimes();
-      result.scrollIntoView({behavior:'smooth', block:'center'});
-    });
-  </script>
+<a class="floating-book" href="booking.html">立即預約</a>
+<script src="js/script.js"></script>
 </body>
 </html>
