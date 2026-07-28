@@ -42,15 +42,15 @@
     }
     .brand{
       display:flex;align-items:center;gap:9px;
-      color:var(--brown);font-weight:800;letter-spacing:.08em;
+      color:var(--brown);font-weight:800;letter-spacing:.06em;font-size:.96rem;
     }
-    .brand img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+    .brand img{width:46px;height:46px;border-radius:50%;object-fit:cover}
 main{max-width:760px;margin:auto}
     section{padding:52px 18px}
     h1,h2,h3,p{margin-top:0}
     h1{
       margin-bottom:8px;
-      font-size:clamp(2.8rem,13vw,4.6rem);
+      font-size:clamp(2.45rem,11.5vw,4.15rem);
       line-height:1.05;
       letter-spacing:.02em;
       color:var(--brown);
@@ -73,8 +73,8 @@ main{max-width:760px;margin:auto}
       box-shadow:0 10px 24px rgba(112,66,24,.18);
     }
 
-    .hero{padding-top:42px}
-    .hero-copy{margin-bottom:28px}
+    .hero{padding-top:28px;padding-bottom:38px}
+    .hero-copy{margin-bottom:20px}
     .hero-copy .tagline{
       margin-bottom:12px;font-size:1.25rem;font-weight:700;color:#5c4d42;
     }
@@ -115,7 +115,26 @@ main{max-width:760px;margin:auto}
     .cat-card h3{font-size:1.55rem;color:var(--brown);margin-bottom:2px}
     .cat-card p{margin:0;color:var(--muted);font-size:.94rem}
     .swipe-hint{
-      padding:0 18px 16px;text-align:center;color:#9a897b;font-size:.82rem;
+      padding:0 18px 8px;text-align:center;color:#9a897b;font-size:.82rem;
+    }
+
+    .cat-dots{
+      display:flex;
+      justify-content:center;
+      gap:7px;
+      padding:0 18px 15px;
+    }
+    .cat-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#cfbead;
+      transition:.2s ease;
+    }
+    .cat-dot.active{
+      width:18px;
+      border-radius:999px;
+      background:var(--brown);
     }
 
     .booking-section{background:var(--soft)}
@@ -141,9 +160,9 @@ main{max-width:760px;margin:auto}
       outline:none;
     }
     input[type="date"]{
-      height:48px;
-      min-height:48px;
-      line-height:48px;
+      height:46px;
+      min-height:46px;
+      line-height:46px;
       padding-top:0;
       padding-bottom:0;
       -webkit-appearance:none;
@@ -175,16 +194,18 @@ main{max-width:760px;margin:auto}
     }
 
     details{
-      background:var(--paper);
-      border:1px solid rgba(112,66,24,.08);
-      border-radius:16px;
-      padding:16px 17px;
-      margin-top:12px;
+      background:transparent;
+      border:0;
+      border-bottom:1px solid rgba(112,66,24,.20);
+      border-radius:0;
+      padding:17px 2px;
+      margin:0;
     }
     summary{
       cursor:pointer;
       color:var(--brown);
       font-weight:800;
+      padding:0 2px;
       list-style:none;
       display:flex;
       justify-content:space-between;
@@ -252,6 +273,12 @@ main{max-width:760px;margin:auto}
       text-align:center;
       font-weight:800;
       box-shadow:0 14px 32px rgba(80,49,22,.28);
+      transition:opacity .25s ease,transform .25s ease;
+    }
+    .floating-book.is-hidden{
+      opacity:0;
+      transform:translateY(120%);
+      pointer-events:none;
     }
 
     @media(min-width:700px){
@@ -277,7 +304,7 @@ main{max-width:760px;margin:auto}
         <span class="eyebrow">COFFEE・DESSERT・CATS</span>
         <h1>貓嶼・慢焙</h1>
         <div class="tagline">慢一點，與貓相遇。</div>
-        <p>一間讓人放慢腳步，也讓貓咪保有自己節奏的預約制咖啡廳。</p>
+        <p>一間讓人慢下來的咖啡廳。</p>
       </div>
 
       <div class="cat-slider" aria-label="貓咪介紹">
@@ -302,8 +329,36 @@ main{max-width:760px;margin:auto}
           </article>
         </div>
         <div class="swipe-hint">左右滑動認識島上的貓咪</div>
+        <div class="cat-dots" id="catDots" aria-label="貓咪卡片頁數"></div>
       </div>
     </section>
+
+    <section id="qa">
+      <h2>常見問題</h2>
+      <p class="muted">點一下問題即可展開答案。</p>
+
+      <details>
+        <summary>每次用餐有限時嗎？</summary>
+        <p>每場 100 分鐘，實際流程會依現場狀況安排。</p>
+      </details>
+      <details>
+        <summary>可以抱貓或餵零食嗎？</summary>
+        <p>不主動抱貓，也不提供餵食零食；請讓貓咪自行決定是否靠近。</p>
+      </details>
+      <details>
+        <summary>有低消嗎？</summary>
+        <p>每人低消一杯飲品。</p>
+      </details>
+      <details>
+        <summary>可以帶小朋友嗎？</summary>
+        <p>正式年齡與陪同規定會在開幕前公告。</p>
+      </details>
+      <details>
+        <summary>臨時不能到可以取消嗎？</summary>
+        <p>正式取消規則會在開幕前公告於預約頁面。</p>
+      </details>
+    </section>
+
 
     <section id="booking" class="booking-section">
       <h2>線上預約</h2>
@@ -353,33 +408,6 @@ main{max-width:760px;margin:auto}
         <div id="result" class="result"></div>
       </div>
     </section>
-
-    <section id="qa">
-      <h2>常見問題</h2>
-      <p class="muted">點一下問題即可展開答案。</p>
-
-      <details>
-        <summary>每次用餐有限時嗎？</summary>
-        <p>每場 100 分鐘，實際流程會依現場狀況安排。</p>
-      </details>
-      <details>
-        <summary>可以抱貓或餵零食嗎？</summary>
-        <p>不主動抱貓，也不提供餵食零食；請讓貓咪自行決定是否靠近。</p>
-      </details>
-      <details>
-        <summary>有低消嗎？</summary>
-        <p>每人低消一杯飲品。</p>
-      </details>
-      <details>
-        <summary>可以帶小朋友嗎？</summary>
-        <p>正式年齡與陪同規定會在開幕前公告。</p>
-      </details>
-      <details>
-        <summary>臨時不能到可以取消嗎？</summary>
-        <p>正式取消規則會在開幕前公告於預約頁面。</p>
-      </details>
-    </section>
-
     <section id="location" class="location-section">
       <h2>交通資訊</h2>
       <p class="muted">店址確認後，這裡會提供完整導航資訊。</p>
@@ -410,13 +438,49 @@ main{max-width:760px;margin:auto}
   </main>
 
   <footer>
-    <strong>貓嶼・慢焙</strong><br>
-    © 2026 Maoyu Slow Bake｜V4.1 測試版
+    <img src="logo.jpg" alt="貓嶼・慢焙 Logo" style="width:54px;height:54px;border-radius:50%;object-fit:cover;margin:0 auto 10px;">
+    <strong>貓嶼・慢焙</strong>
+    <div style="margin:8px 0 5px;">Instagram　Facebook</div>
+    <div>© 2026 Maoyu Slow Bake｜V5 骨架版</div>
   </footer>
 
   <a class="floating-book" href="#booking">立即預約</a>
 
   <script>
+
+    const slidesEl = document.querySelector('.slides');
+    const cards = [...document.querySelectorAll('.cat-card')];
+    const dotsEl = document.getElementById('catDots');
+
+    cards.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'cat-dot' + (i === 0 ? ' active' : '');
+      dotsEl.appendChild(dot);
+    });
+
+    function updateCatDots() {
+      const width = slidesEl.clientWidth || 1;
+      const index = Math.round(slidesEl.scrollLeft / width);
+      [...dotsEl.children].forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    slidesEl.addEventListener('scroll', () => {
+      window.requestAnimationFrame(updateCatDots);
+    }, {passive:true});
+
+    const floatingBook = document.querySelector('.floating-book');
+    const bookingSection = document.getElementById('booking');
+
+    const bookingObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        floatingBook.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, {threshold:0.18});
+
+    bookingObserver.observe(bookingSection);
+
     const CAPACITY = 18;
     const ALL_SLOTS = [
       '11:00–12:40',
