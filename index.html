@@ -45,12 +45,7 @@
       color:var(--brown);font-weight:800;letter-spacing:.08em;
     }
     .brand img{width:38px;height:38px;border-radius:50%;object-fit:cover}
-    .top-cta{
-      padding:9px 15px;border-radius:999px;background:var(--brown);color:#fff;
-      font-weight:700;font-size:.9rem;
-    }
-
-    main{max-width:760px;margin:auto}
+main{max-width:760px;margin:auto}
     section{padding:52px 18px}
     h1,h2,h3,p{margin-top:0}
     h1{
@@ -137,12 +132,26 @@
       font-size:.9rem;font-weight:700;color:#66564a;
     }
     input,select{
-      width:100%;min-height:50px;
+      width:100%;
+      height:50px;
       border:1px solid #d9c8b8;
       border-radius:14px;
-      padding:12px 14px;
+      padding:0 14px;
       background:#fff;color:var(--ink);
       outline:none;
+    }
+    input[type="date"]{
+      height:48px;
+      min-height:48px;
+      line-height:48px;
+      padding-top:0;
+      padding-bottom:0;
+      -webkit-appearance:none;
+      appearance:none;
+    }
+    select:disabled{
+      background:#f3eee8;
+      color:#9b8f86;
     }
     input:focus,select:focus{
       border-color:var(--brown);
@@ -260,7 +269,6 @@
       <img src="logo.jpg" alt="貓嶼・慢焙 Logo">
       <span>貓嶼・慢焙</span>
     </a>
-    <a class="top-cta" href="#booking">立即預約</a>
   </header>
 
   <main id="top">
@@ -270,7 +278,6 @@
         <h1>貓嶼・慢焙</h1>
         <div class="tagline">慢一點，與貓相遇。</div>
         <p>一間讓人放慢腳步，也讓貓咪保有自己節奏的預約制咖啡廳。</p>
-        <a class="btn" href="#booking">立即預約</a>
       </div>
 
       <div class="cat-slider" aria-label="貓咪介紹">
@@ -324,12 +331,8 @@
 
           <div>
             <label for="time">時段</label>
-            <select id="time" name="time" required>
-              <option value="">請選擇時段</option>
-              <option>11:00–12:40</option>
-              <option>13:00–14:40</option>
-              <option>15:00–16:40</option>
-              <option>17:00–18:40</option>
+            <select id="time" name="time" required disabled>
+              <option value="">請先選擇日期與人數</option>
             </select>
           </div>
 
@@ -408,45 +411,115 @@
 
   <footer>
     <strong>貓嶼・慢焙</strong><br>
-    © 2026 Maoyu Slow Bake
+    © 2026 Maoyu Slow Bake｜V4.1 測試版
   </footer>
 
   <a class="floating-book" href="#booking">立即預約</a>
 
   <script>
-    const dateInput=document.getElementById('date');
-    const today=new Date();
-    const max=new Date();
-    max.setDate(today.getDate()+30);
+    const CAPACITY = 18;
+    const ALL_SLOTS = [
+      '11:00–12:40',
+      '13:00–14:40',
+      '15:00–16:40',
+      '17:00–18:40'
+    ];
 
-    const fmt=d=>{
-      const local=new Date(d.getTime()-d.getTimezoneOffset()*60000);
+    const form = document.getElementById('bookingForm');
+    const dateInput = document.getElementById('date');
+    const peopleInput = document.getElementById('people');
+    const timeInput = document.getElementById('time');
+
+    const today = new Date();
+    const max = new Date();
+    max.setDate(today.getDate() + 30);
+
+    const fmt = d => {
+      const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
       return local.toISOString().split('T')[0];
     };
 
-    dateInput.min=fmt(today);
-    dateInput.max=fmt(max);
+    dateInput.min = fmt(today);
+    dateInput.max = fmt(max);
 
-    document.getElementById('bookingForm').addEventListener('submit',function(e){
+    function getBookings() {
+      return JSON.parse(localStorage.getItem('maoyuBookings') || '[]');
+    }
+
+    function bookedSeats(date, time) {
+      return getBookings()
+        .filter(item => item.date === date && item.time === time)
+        .reduce((sum, item) => sum + Number(item.people || 0), 0);
+    }
+
+    function updateAvailableTimes() {
+      const date = dateInput.value;
+      const partySize = Number(peopleInput.value);
+
+      timeInput.innerHTML = '';
+
+      if (!date || !partySize) {
+        timeInput.disabled = true;
+        timeInput.innerHTML = '<option value="">請先選擇日期與人數</option>';
+        return;
+      }
+
+      const available = ALL_SLOTS.filter(slot => {
+        const remaining = CAPACITY - bookedSeats(date, slot);
+        return remaining >= partySize;
+      });
+
+      timeInput.disabled = false;
+
+      if (!available.length) {
+        timeInput.disabled = true;
+        timeInput.innerHTML = '<option value="">當日已無可預約時段</option>';
+        return;
+      }
+
+      timeInput.innerHTML = '<option value="">請選擇時段</option>';
+
+      available.forEach(slot => {
+        const remaining = CAPACITY - bookedSeats(date, slot);
+        const option = document.createElement('option');
+        option.value = slot;
+        option.textContent = `${slot}（剩餘 ${remaining} 位）`;
+        timeInput.appendChild(option);
+      });
+    }
+
+    dateInput.addEventListener('change', updateAvailableTimes);
+    peopleInput.addEventListener('change', updateAvailableTimes);
+
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const data=Object.fromEntries(new FormData(this).entries());
-      const list=JSON.parse(localStorage.getItem('maoyuBookings')||'[]');
+      const data = Object.fromEntries(new FormData(this).entries());
+      const partySize = Number(data.people);
+      const remaining = CAPACITY - bookedSeats(data.date, data.time);
 
-      data.id=Date.now();
-      data.createdAt=new Date().toLocaleString('zh-TW');
+      if (remaining < partySize) {
+        alert('這個時段的剩餘名額不足，請重新選擇。');
+        updateAvailableTimes();
+        return;
+      }
+
+      const list = getBookings();
+      data.id = Date.now();
+      data.createdAt = new Date().toLocaleString('zh-TW');
       list.push(data);
-      localStorage.setItem('maoyuBookings',JSON.stringify(list));
+      localStorage.setItem('maoyuBookings', JSON.stringify(list));
 
-      const result=document.getElementById('result');
-      result.style.display='block';
-      result.innerHTML=
-        '<strong>測試預約已儲存 ✓</strong><br>'+
-        data.date+'　'+data.time+'<br>'+
-        data.name+'｜'+data.people+' 位';
+      const result = document.getElementById('result');
+      result.style.display = 'block';
+      result.innerHTML =
+        '<strong>測試預約已儲存 ✓</strong><br>' +
+        data.date + '　' + data.time + '<br>' +
+        data.name + '｜' + data.people + ' 位';
 
       this.reset();
-      result.scrollIntoView({behavior:'smooth',block:'center'});
+      updateAvailableTimes();
+      result.scrollIntoView({behavior:'smooth', block:'center'});
     });
   </script>
 </body>
