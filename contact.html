@@ -1,150 +1,71 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.querySelector(".menu-toggle");
-  const menu = document.querySelector(".mobile-menu");
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7f1e8">
+  <title>聯絡我們｜貓嶼・慢焙</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="">
 
-  if (toggle && menu) {
-    toggle.addEventListener("click", () => {
-      const open = menu.classList.toggle("open");
-      toggle.classList.toggle("active", open);
-      toggle.setAttribute("aria-expanded", String(open));
-      document.body.classList.toggle("menu-open", open);
-    });
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="logo.jpg" alt="貓嶼・慢焙 Logo">
+      <span>貓嶼・慢焙</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="開啟選單" aria-expanded="false">
+      <span></span>
+    </button>
+  </div>
+</header>
+<div class="mobile-menu">
+  <nav>
+    <a href="index.html" class="">首頁</a>
+<a href="booking.html" class="">線上預約</a>
+<a href="qa.html" class="">常見問題</a>
+<a href="pet-rule.html" class="">寵物互動規則</a>
+<a href="store-rule.html" class="">入店規定</a>
+<a href="contact.html" class="active">聯絡我們</a>
+  </nav>
+</div>
 
-    menu.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        menu.classList.remove("open");
-        toggle.classList.remove("active");
-        toggle.setAttribute("aria-expanded", "false");
-        document.body.classList.remove("menu-open");
-      });
-    });
-  }
+<main>
 
-  const slides = document.querySelector(".cat-slides");
-  const dots = document.getElementById("catDots");
+<section class="page-hero">
+  <span class="eyebrow">CONTACT</span>
+  <h1>聯絡我們</h1>
+  <p class="lead">店址與聯絡資訊確認後會完整補上。</p>
 
-  if (slides && dots) {
-    const cards = [...slides.querySelectorAll(".cat-card")];
-    cards.forEach((_, i) => {
-      const dot = document.createElement("span");
-      dot.className = "cat-dot" + (i === 0 ? " active" : "");
-      dots.appendChild(dot);
-    });
+  <div class="contact-card">
+    <div class="map-placeholder">Google 地圖<br>店址確認後嵌入</div>
+    <div class="info-row"><strong>地址</strong>待公布</div>
+    <div class="info-row"><strong>營業時間</strong>待公布</div>
+    <div class="info-row"><strong>停車資訊</strong>待公布</div>
+    <div class="info-row"><strong>電話</strong>待公布</div>
+    <div class="info-row"><strong>Instagram</strong>待公布</div>
+    <div class="info-row"><strong>Facebook</strong>待公布</div>
+    <div style="display:grid;gap:12px;margin-top:18px;">
+      <a class="btn" href="#">開啟導航</a>
+      <a class="btn secondary" href="#">Instagram</a>
+    </div>
+  </div>
+</section>
 
-    const updateDots = () => {
-      const width = slides.clientWidth || 1;
-      const index = Math.round(slides.scrollLeft / width);
-      [...dots.children].forEach((dot, i) => {
-        dot.classList.toggle("active", i === index);
-      });
-    };
+</main>
 
-    slides.addEventListener("scroll", () => {
-      window.requestAnimationFrame(updateDots);
-    }, {passive:true});
-  }
+<footer class="site-footer">
+  <img src="logo.jpg" alt="貓嶼・慢焙 Logo">
+  <strong>貓嶼・慢焙</strong>
+  <div class="footer-links">
+    <span>Instagram</span>
+    <span>Facebook</span>
+  </div>
+  <div>© 2026 Maoyu Slow Bake</div>
+</footer>
 
-  const bookingForm = document.getElementById("bookingForm");
-  if (bookingForm) {
-    const CAPACITY = 18;
-    const ALL_SLOTS = [
-      "11:00–12:40",
-      "13:00–14:40",
-      "15:00–16:40",
-      "17:00–18:40"
-    ];
-
-    const dateInput = document.getElementById("date");
-    const peopleInput = document.getElementById("people");
-    const timeInput = document.getElementById("time");
-
-    const today = new Date();
-    const max = new Date();
-    max.setDate(today.getDate() + 30);
-
-    const fmt = d => {
-      const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
-      return local.toISOString().split("T")[0];
-    };
-
-    dateInput.min = fmt(today);
-    dateInput.max = fmt(max);
-
-    const getBookings = () =>
-      JSON.parse(localStorage.getItem("maoyuBookings") || "[]");
-
-    const bookedSeats = (date, time) =>
-      getBookings()
-        .filter(item => item.date === date && item.time === time)
-        .reduce((sum, item) => sum + Number(item.people || 0), 0);
-
-    const updateAvailableTimes = () => {
-      const date = dateInput.value;
-      const partySize = Number(peopleInput.value);
-      timeInput.innerHTML = "";
-
-      if (!date || !partySize) {
-        timeInput.disabled = true;
-        timeInput.innerHTML =
-          '<option value="">請先選擇日期與人數</option>';
-        return;
-      }
-
-      const available = ALL_SLOTS.filter(slot => {
-        return CAPACITY - bookedSeats(date, slot) >= partySize;
-      });
-
-      if (!available.length) {
-        timeInput.disabled = true;
-        timeInput.innerHTML =
-          '<option value="">當日已無可預約時段</option>';
-        return;
-      }
-
-      timeInput.disabled = false;
-      timeInput.innerHTML = '<option value="">請選擇時段</option>';
-
-      available.forEach(slot => {
-        const remaining = CAPACITY - bookedSeats(date, slot);
-        const option = document.createElement("option");
-        option.value = slot;
-        option.textContent = `${slot}（剩餘 ${remaining} 位）`;
-        timeInput.appendChild(option);
-      });
-    };
-
-    dateInput.addEventListener("change", updateAvailableTimes);
-    peopleInput.addEventListener("change", updateAvailableTimes);
-
-    bookingForm.addEventListener("submit", e => {
-      e.preventDefault();
-
-      const data = Object.fromEntries(new FormData(bookingForm).entries());
-      const partySize = Number(data.people);
-      const remaining = CAPACITY - bookedSeats(data.date, data.time);
-
-      if (remaining < partySize) {
-        alert("這個時段的剩餘名額不足，請重新選擇。");
-        updateAvailableTimes();
-        return;
-      }
-
-      const list = getBookings();
-      data.id = Date.now();
-      data.createdAt = new Date().toLocaleString("zh-TW");
-      list.push(data);
-      localStorage.setItem("maoyuBookings", JSON.stringify(list));
-
-      const result = document.getElementById("result");
-      result.style.display = "block";
-      result.innerHTML =
-        "<strong>測試預約已儲存 ✓</strong><br>" +
-        data.date + "　" + data.time + "<br>" +
-        data.name + "｜" + data.people + " 位";
-
-      bookingForm.reset();
-      updateAvailableTimes();
-      result.scrollIntoView({behavior:"smooth", block:"center"});
-    });
-  }
-});
+<a class="floating-book" href="booking.html">立即預約</a>
+<script src="js/script.js"></script>
+</body>
+</html>

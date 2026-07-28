@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7f1e8">
+  <title>線上預約｜貓嶼・慢焙</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="booking-page">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="logo.jpg" alt="貓嶼・慢焙 Logo">
+      <span>貓嶼・慢焙</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="開啟選單" aria-expanded="false">
+      <span></span>
+    </button>
+  </div>
+</header>
+<div class="mobile-menu">
+  <nav>
+    <a href="index.html" class="">首頁</a>
+<a href="booking.html" class="active">線上預約</a>
+<a href="qa.html" class="">常見問題</a>
+<a href="pet-rule.html" class="">寵物互動規則</a>
+<a href="store-rule.html" class="">入店規定</a>
+<a href="contact.html" class="">聯絡我們</a>
+  </nav>
+</div>
+
+<main>
+
+<section class="page-hero booking-section">
+  <span class="eyebrow">BOOKING</span>
+  <h1>線上預約</h1>
+  <p class="lead">依照日期、人數與時段完成預約。</p>
+
+  <div class="booking-card">
+    <form id="bookingForm">
+      <div>
+        <label for="date">日期</label>
+        <input id="date" name="date" type="date" required>
+      </div>
+      <div>
+        <label for="people">人數</label>
+        <select id="people" name="people" required>
+          <option value="">請選擇人數</option>
+          <option value="1">1 位</option>
+          <option value="2">2 位</option>
+          <option value="3">3 位</option>
+          <option value="4">4 位</option>
+          <option value="5">5 位</option>
+          <option value="6">6 位</option>
+        </select>
+      </div>
+      <div>
+        <label for="time">時段</label>
+        <select id="time" name="time" required disabled>
+          <option value="">請先選擇日期與人數</option>
+        </select>
+      </div>
+      <div>
+        <label for="name">姓名</label>
+        <input id="name" name="name" autocomplete="name" placeholder="請輸入訂位姓名" required>
+      </div>
+      <div>
+        <label for="phone">電話</label>
+        <input id="phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="09xx-xxx-xxx" required>
+      </div>
+      <p class="notice">每場 100 分鐘，每時段最多 18 位；每人低消一杯飲品。</p>
+      <button class="btn" type="submit">送出預約</button>
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <img src="logo.jpg" alt="貓嶼・慢焙 Logo">
+  <strong>貓嶼・慢焙</strong>
+  <div class="footer-links">
+    <span>Instagram</span>
+    <span>Facebook</span>
+  </div>
+  <div>© 2026 Maoyu Slow Bake</div>
+</footer>
+
+<a class="floating-book" href="booking.html">立即預約</a>
+<script src="js/script.js"></script>
+</body>
+</html>
