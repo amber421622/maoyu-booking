@@ -477,3 +477,57 @@ body:not(.booking-page) main > .page-hero:first-child .cat-slider{
   margin-bottom:8px;
   color:#6f6259;
 }
+
+
+/* V6.3：貓掌選單按鈕 */
+.menu-toggle{
+  position:relative !important;
+  display:grid !important;
+  place-items:center !important;
+  width:36px !important;
+  height:36px !important;
+  padding:6px !important;
+  border:0 !important;
+  background:transparent !important;
+}
+
+.menu-toggle .paw-icon{
+  width:22px;
+  height:22px;
+  display:block;
+  fill:var(--brown);
+  transition:opacity .18s ease, transform .22s ease;
+}
+
+/* 清除原本漢堡圖示的線條 */
+.menu-toggle > span{
+  display:none !important;
+}
+.menu-toggle::before,
+.menu-toggle::after{
+  content:"" !important;
+  position:absolute;
+  left:9px;
+  width:18px !important;
+  height:1.5px !important;
+  margin:0 !important;
+  border-radius:999px;
+  background:var(--brown) !important;
+  opacity:0;
+  transform:none !important;
+  transition:opacity .18s ease, transform .22s ease;
+}
+
+/* 選單展開後，貓掌切換成關閉符號 */
+.menu-toggle.active .paw-icon{
+  opacity:0;
+  transform:scale(.75);
+}
+.menu-toggle.active::before{
+  opacity:1;
+  transform:rotate(45deg) !important;
+}
+.menu-toggle.active::after{
+  opacity:1;
+  transform:rotate(-45deg) !important;
+}
