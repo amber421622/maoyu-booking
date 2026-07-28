@@ -423,3 +423,57 @@ body:not(.booking-page) main > .page-hero:first-child .lead{
 body:not(.booking-page) main > .page-hero:first-child .cat-slider{
   margin-top:0;
 }
+
+
+/* V6.2：精簡品牌重複與縮小選單圖示 */
+.brand span{
+  display:none !important;
+}
+
+.brand{
+  gap:0 !important;
+}
+
+.brand img{
+  width:58px !important;
+  height:58px !important;
+}
+
+.menu-toggle{
+  width:34px !important;
+  height:34px !important;
+  padding:0 !important;
+}
+
+.menu-toggle span,
+.menu-toggle::before,
+.menu-toggle::after{
+  width:14px !important;
+  height:1px !important;
+}
+
+.menu-toggle span{
+  margin:3px 0 !important;
+}
+
+.menu-toggle.active::before{
+  transform:translateY(4px) rotate(45deg) !important;
+}
+
+.menu-toggle.active::after{
+  transform:translateY(-4px) rotate(-45deg) !important;
+}
+
+.site-footer img{
+  display:none !important;
+}
+
+.site-footer{
+  padding-top:28px !important;
+}
+
+.site-footer strong{
+  display:block;
+  margin-bottom:8px;
+  color:#6f6259;
+}
