@@ -564,3 +564,92 @@ body:not(.booking-page) main > .page-hero:first-child .cat-slider{
   opacity:1 !important;
   transform:scale(.92) !important;
 }
+
+
+/* V6.4：首頁品牌細節精修 */
+
+/* 1. Header Logo 維持目前尺寸，不再放大 */
+.brand img{
+  width:58px !important;
+  height:58px !important;
+}
+
+/* 2. 貓掌稍微放大，增加按壓回饋 */
+.menu-toggle{
+  width:38px !important;
+  height:38px !important;
+  padding:6px !important;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.menu-toggle .paw-icon{
+  width:25px !important;
+  height:25px !important;
+  transition:transform .14s ease, opacity .14s ease !important;
+}
+
+.menu-toggle:active .paw-icon{
+  transform:scale(.82) !important;
+}
+
+.menu-toggle.active .paw-icon{
+  opacity:1 !important;
+  transform:scale(.94) !important;
+}
+
+/* 3. 首頁 Hero 往上收，減少標題上方留白 */
+body:not(.booking-page) main > .page-hero:first-child{
+  padding-top:24px !important;
+}
+
+body:not(.booking-page) main > .page-hero:first-child h1{
+  margin-bottom:10px !important;
+}
+
+/* 4. Footer 文字層級調整 */
+.site-footer{
+  padding-top:26px !important;
+}
+
+.site-footer strong{
+  font-size:1.08rem !important;
+  font-weight:800 !important;
+  letter-spacing:.04em !important;
+  color:var(--brown) !important;
+  margin-bottom:10px !important;
+}
+
+.footer-links{
+  margin:4px 0 6px !important;
+  gap:20px !important;
+  font-size:.94rem !important;
+}
+
+.site-footer > div:last-child{
+  font-size:.78rem !important;
+  color:#94877d !important;
+}
+
+/* 5. 浮動預約按鈕縮窄、降低高度 */
+.floating-book{
+  left:50% !important;
+  right:auto !important;
+  width:min(78%, 360px) !important;
+  min-height:54px !important;
+  padding:12px 18px !important;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:18px !important;
+  box-shadow:0 12px 28px rgba(80,49,22,.24) !important;
+}
+
+@media(min-width:760px){
+  .floating-book{
+    left:auto !important;
+    right:28px !important;
+    width:210px !important;
+    transform:none !important;
+  }
+}
