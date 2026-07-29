@@ -653,3 +653,96 @@ body:not(.booking-page) main > .page-hero:first-child h1{
     transform:none !important;
   }
 }
+
+
+/* V6.5：首頁精簡定稿方向 */
+
+/* Header 移除左上 Logo，只保留貓掌 */
+.brand{
+  display:none !important;
+}
+
+.site-header .header-inner{
+  min-height:62px !important;
+  padding-top:8px !important;
+  padding-bottom:8px !important;
+  justify-content:flex-end !important;
+}
+
+.mobile-menu{
+  inset:62px 0 0 !important;
+}
+
+/* 貓掌稍微往左、往下，位置更穩 */
+.menu-toggle{
+  margin-right:6px !important;
+  transform:translateY(2px);
+}
+
+/* 首頁標題區再往上收 */
+body:not(.booking-page) main > .page-hero:first-child{
+  padding-top:20px !important;
+}
+
+/* 貓咪卡片整體縮小，避免與浮動按鈕打架 */
+body:not(.booking-page) .cat-slider{
+  width:calc(100% - 14px) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  border-radius:22px !important;
+}
+
+body:not(.booking-page) .cat-card{
+  padding:14px !important;
+}
+
+body:not(.booking-page) .cat-photo{
+  aspect-ratio:4 / 3 !important;
+  margin-bottom:12px !important;
+  border-radius:18px !important;
+}
+
+body:not(.booking-page) .cat-photo img{
+  width:68% !important;
+  height:68% !important;
+}
+
+body:not(.booking-page) .cat-card h3{
+  font-size:1.35rem !important;
+  margin-bottom:0 !important;
+}
+
+body:not(.booking-page) .cat-card p{
+  font-size:.94rem !important;
+}
+
+body:not(.booking-page) .cat-hint{
+  padding-top:2px !important;
+  font-size:.78rem !important;
+}
+
+body:not(.booking-page) .cat-dots{
+  padding-bottom:12px !important;
+}
+
+/* Footer 移除重複品牌名稱，只留社群與版權 */
+.site-footer strong{
+  display:none !important;
+}
+
+.site-footer{
+  padding-top:22px !important;
+}
+
+.footer-links{
+  margin-top:0 !important;
+}
+
+/* 浮動預約按鈕再薄、再窄 */
+.floating-book{
+  width:min(72%, 330px) !important;
+  min-height:50px !important;
+  padding:10px 16px !important;
+  border-radius:16px !important;
+  font-size:.98rem !important;
+}
