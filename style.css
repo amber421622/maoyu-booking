@@ -869,3 +869,18 @@ body:not(.booking-page) main > .page-hero:first-child{
 .cat-card p{
   min-height:1.7em;
 }
+
+
+/* V6.9.1：品牌卡 Logo 真正填滿深色照片框 */
+.brand-logo-photo{
+  overflow:hidden !important;
+  padding:0 !important;
+}
+
+.brand-logo-photo img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  transform:scale(1.42) !important;
+  transform-origin:center center !important;
+}
