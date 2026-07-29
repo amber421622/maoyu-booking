@@ -746,3 +746,89 @@ body:not(.booking-page) .cat-dots{
   border-radius:16px !important;
   font-size:.98rem !important;
 }
+
+
+/* V6.6：Header 顯示店名，首頁第一張卡改為品牌卡 */
+
+/* Header 左側顯示「貓嶼・慢焙」 */
+.brand{
+  display:flex !important;
+  align-items:center !important;
+  gap:0 !important;
+  color:var(--brown) !important;
+  font-weight:800 !important;
+  letter-spacing:.06em !important;
+}
+
+.brand img{
+  display:none !important;
+}
+
+.brand span{
+  display:inline !important;
+  font-size:1.05rem !important;
+  white-space:nowrap;
+}
+
+.site-header .header-inner{
+  min-height:62px !important;
+  padding:8px 18px !important;
+  justify-content:space-between !important;
+}
+
+.mobile-menu{
+  inset:62px 0 0 !important;
+}
+
+/* 首頁移除大標題後，卡片直接接在 Header 下方 */
+body:not(.booking-page) main > .page-hero:first-child{
+  padding-top:24px !important;
+}
+
+/* 第一張品牌卡 */
+.brand-card{
+  text-align:center;
+}
+
+.brand-card .cat-photo{
+  margin-bottom:18px !important;
+}
+
+.brand-card-copy{
+  margin:0 0 4px !important;
+  font-size:1.05rem !important;
+  line-height:1.7 !important;
+  color:var(--muted) !important;
+}
+
+/* 滑動提示維持在卡片底部 */
+.cat-hint{
+  margin-top:4px !important;
+}
+
+
+/* V6.7：依指定首頁架構固定版面 */
+.brand span{
+  display:inline !important;
+  font-size:1.05rem !important;
+  font-weight:800 !important;
+  letter-spacing:.04em !important;
+}
+
+.brand-logo-photo img{
+  width:72% !important;
+  height:72% !important;
+  object-fit:contain !important;
+}
+
+.brand-card-copy{
+  margin:2px 0 0 !important;
+  text-align:center !important;
+  font-size:1rem !important;
+  color:var(--muted) !important;
+}
+
+.cat-hint{
+  text-align:center !important;
+  margin-top:2px !important;
+}
