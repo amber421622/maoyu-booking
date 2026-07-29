@@ -884,3 +884,59 @@ body:not(.booking-page) main > .page-hero:first-child{
   transform:scale(1.42) !important;
   transform-origin:center center !important;
 }
+
+/* V6.9.2：移除品牌卡內深色照片框 */
+.brand-card .cat-photo{
+  background:transparent !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+
+.brand-card .cat-photo img{
+  width:100% !important;
+  height:auto !important;
+  object-fit:contain !important;
+  transform:none !important;
+}
+
+.brand-card{
+  padding-top:22px !important;
+}
+
+
+/* V6.9.3：所有介紹卡統一為直接放照片的極簡風格 */
+.cat-card .cat-photo{
+  background:transparent !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  overflow:hidden !important;
+}
+
+.cat-card .cat-photo img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  transform:none !important;
+}
+
+/* 品牌卡 Logo 保持完整顯示，不裁切 */
+.brand-card .cat-photo img{
+  width:100% !important;
+  height:auto !important;
+  object-fit:contain !important;
+}
+
+/* 統一卡片內距與文字區塊 */
+.cat-card{
+  padding-top:20px !important;
+}
+
+.cat-card h3{
+  margin-top:16px !important;
+}
+
+.cat-card p{
+  margin-bottom:0 !important;
+}
