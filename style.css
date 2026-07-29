@@ -940,3 +940,23 @@ body:not(.booking-page) main > .page-hero:first-child{
 .cat-card p{
   margin-bottom:0 !important;
 }
+
+
+/* V6.9.4 Logo white background card */
+.brand-card .cat-photo{
+  background:#fff !important;
+  border-radius:20px !important;
+  padding:26px !important;
+  box-shadow:0 4px 12px rgba(0,0,0,.04) !important;
+  overflow:hidden !important;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.brand-card .cat-photo img{
+  width:78% !important;
+  max-width:360px;
+  height:auto !important;
+  object-fit:contain !important;
+}
